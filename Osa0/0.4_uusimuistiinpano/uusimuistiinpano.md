@@ -1,7 +1,9 @@
 sekvenssi diagrammi
 
 ```mermaid
-graph TD;
+sequenceDiagram
+    participant browser
+    participant server
     browser->>server: POST https://fullstack-exampleapp.herokuapp.com/new_note
     Lähetä note serverille
    
