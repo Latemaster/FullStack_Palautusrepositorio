@@ -1,5 +1,9 @@
+Here is a simple flow chart:
+
 ```mermaid
-graph 04;
-A --> B;
-B --> C;
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
 ```
