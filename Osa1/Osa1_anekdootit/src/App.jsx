@@ -11,6 +11,15 @@ const randomInteger = (length) => {
   return randomInt 
 }
 
+const Anecdote = (props) => {
+  return (
+    <div>
+    <p>{props.anecdotes} </p>
+    <p>has {props.points} votes </p>
+    </div>
+  )
+}
+
 
 const App = () => {
   const anecdotes = [
@@ -28,24 +37,34 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
 
+  const [mostpoints, setMostPoints] = useState(0)
+
 
   const handleAnecdoteClick = () => { 
     setSelected(randomInteger(anecdotes.length))
   }
 
-  const handelVoteClick = () => {
+  const handleVoteClick = () => {
     const newPoints = [...points]
     newPoints[selected] += 1
     setPoints(newPoints)
+    for (let i = 0; i < newPoints.length; i ++)
+    {
+      if (newPoints[i] > newPoints[mostpoints])
+      {
+        setMostPoints(i)
+      }
+    }
   }
-  
 
   return (
     <div>
-      <p>{anecdotes[selected]} </p>
-      <p>has {points[selected]} votes </p>
-      <Button handleClick = {() => handelVoteClick()}  text = {"vote"}/>
+      <h1>Anecdote of the day</h1>
+      <Anecdote anecdotes = {anecdotes[selected]} points ={points[selected]} />
+      <Button handleClick = {() => handleVoteClick()}  text = {"vote"}/>
       <Button handleClick = {() => handleAnecdoteClick()} text = {"next anecdote"}/>
+      <h1>Anecdote with most votes</h1>
+      <Anecdote anecdotes = {anecdotes[mostpoints]} points ={points[mostpoints]} />
     </div>
   )
 }
